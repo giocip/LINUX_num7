@@ -28,10 +28,10 @@ for educational school, web e-commerce developing, accounting apps and general m
 
 	int main() {
 
-		/* ADDITION           */ add("2.5", "3.6").print(" = 2.5 + 3.6 (ADDITION)\n"); 	           //6.1                 
-		/* SUBTRACTION        */ sub("2.5", "3.6").print(" = 2.5 - 3.6 (SUBTRACTION)\n"); 	      //-1.1               
-		/* MULTIPLICATION     */ mul("2.5", "3.6").print(" = 2.5 * 3.6 (MULTIPLICATION)\n"); 	   //9.0                 
-		/* DIVISION           */ div("2.5", "3.6").print(" = 2.5 / 3.6 (DIVISION)\n"); 	        //0.6944444444444444444444444444444444444444
+		/* ADDITION           */ add("2.5", "3.6").print(" = 2.5 + 3.6 (ADDITION)\n"); //6.1                 
+		/* SUBTRACTION        */ sub("2.5", "3.6").print(" = 2.5 - 3.6 (SUBTRACTION)\n"); //-1.1               
+		/* MULTIPLICATION     */ mul("2.5", "3.6").print(" = 2.5 * 3.6 (MULTIPLICATION)\n"); //9.0                 
+		/* DIVISION           */ div("2.5", "3.6").print(" = 2.5 / 3.6 (DIVISION)\n"); 	    //0.6944444444444444444444444444444444444444
 		/* DIVISION REMAINDER */ mod("11.0", "8.0").print(" = 11 % 8 (DIVISION REMAINDER)\n"); //3.0                 
 		/* INV                */ inv("3.0").print(" = 1 / 3 (INV)\n");  //0.33333333333333333333333333333333                
 		/* x2                 */ x2("3.0").print(" = 3 ^ 2 (x2)\n");   //9.0
