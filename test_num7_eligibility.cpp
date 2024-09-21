@@ -1,4 +1,5 @@
-//test_num7_eligibility.cpp
+ //test_num7_eligibility.cpp
+//compiling command: g++ test_num7_eligibility.cpp num7.cpp -o test_num7_eligibility
 #include "num7.h"
 #include <time.h>
 using namespace num7;
