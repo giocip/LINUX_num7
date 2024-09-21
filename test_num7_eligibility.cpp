@@ -1,5 +1,6 @@
- //test_num7_eligibility.cpp
-//compiling command: g++ test_num7_eligibility.cpp num7.cpp -o test_num7_eligibility
+  //test_num7_eligibility.cpp
+ //compiling command: g++ test_num7_eligibility.cpp num7.cpp -o test_num7_eligibility
+//it checks computing system reliability
 #include "num7.h"
 #include <time.h>
 using namespace num7;
