@@ -14,6 +14,9 @@
  ///////////////////////////////////////////////// num7 NAMESPACE START
 namespace num7 {          // STARTING CURLY BRACKET num7 namespace
 
+    /// num7::GLOBAL VARIABLES
+    int Error = 0; //ERROR HANDLING
+
     //////////////////////////////////////////////// NUM IN-LINE FUNCTIONS /////////////////////////////////////////////////
     /////// -2 ///////
     NUM::NUM(long int n) {
