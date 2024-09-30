@@ -23,7 +23,7 @@ using namespace std;
 namespace num7 {          // STARTING CURLY BRACKET num7 namespace
     //COMMON DATA TYPE
     class NUM;
-    int Error;  //GLOBAL VARIABLE ERROR HANDLING => num7.h
+    extern int Error;  //ERROR HANDLING
     
     //typedef  int32_t i32;
     typedef signed int i32;
