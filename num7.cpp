@@ -14,13 +14,8 @@
  ///////////////////////////////////////////////// num7 NAMESPACE START
 namespace num7 {          // STARTING CURLY BRACKET num7 namespace
 
-    /// COMMON DATA TYPE
-    //class NUM;
-    extern int Error; //ERROR HANDLING
-
     //////////////////////////////////////////////// NUM IN-LINE FUNCTIONS /////////////////////////////////////////////////
-
-     /////// -2 ///////
+    /////// -2 ///////
     NUM::NUM(long int n) {
         static NUM num;
         num = i64NUM(n);
