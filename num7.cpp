@@ -4147,6 +4147,14 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
     int is_zero(NUM* n) {
         return (strcmp("0.0", n->C)) ? 0 : 1;
     }
+    /// NUM OUT-LINE /// CHECK IF POINTED NUM OBJECT IS POSITIVE, CODE: NUM a(1); print(is_positive(&a), " "); a--; print(is_positive(&a), "\n"); //1 0
+    int is_positive(NUM* n) {
+        return n->is_positive();
+    }
+    /// NUM OUT-LINE /// CHECK IF POINTED NUM OBJECT IS NEGATIVE, CODE: NUM a(-1); print(is_negative(&a), " "); a++; print(is_negative(&a), "\n"); //1 0
+    int is_negative(NUM* n) {
+        return n->is_negative();
+    }
     /// NUM OUT-LINE /// CHECK IF POINTED NUM OBJECT IS INTEGER VALUE, CODE: NUM a("7.0"); print(is_int(&a), "\n");  //1
     int is_int(NUM* n) {
         char* s = exp2num(*n);
