@@ -126,11 +126,13 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
     I64* I128add(I64[], I64[]);
     NUM& I128addis(const char*, const char*);
     char* invfs(const char*, i64 d = 30, int check = 1);
+    int is_zero(NUM*);
+    int is_positive(NUM*);
+    int is_negative(NUM*);
     int is_even(NUM*);
     int is_odd(NUM*);
     int is_int(NUM*);
     int is_float(NUM*);
-    int is_zero(NUM*);
     int is_prime(NUM*);
     const char* is_strfmt_exp(const char*);
     const char* is_strfmt_int(const char*);
