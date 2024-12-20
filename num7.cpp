@@ -38,7 +38,7 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
     NUM::NUM(double n) {
         this->S = 0; this->C = NULL; this->E = 0; this->CE = NULL; this->len_I = 0; this->len_F = 0;
         char s[32];
-        sprintf(s, "%.15f", n);
+        snprintf(s, 32, "%.15f", n);
         raise("double IS NOT CONSTRUCTION VALID DATA, use NUM.from_double() instead!", s);
         *this = 0;
         return;
@@ -897,7 +897,7 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
     /// NUM IN-LINE /// (DEBUG) RETURN STRING NUM STRUCTURE ATTRIBUTES, CODE: NUM a("-123.0e-3"); char* s = a.sprint_fields(); print(s, "\n"); //S=1 CE=123.0e-3 C=123.0 E=-3 len_I=3 len_F=1
     char* NUM::sprint_fields() const {
         static char buffer[128];
-        sprintf(buffer, "S=%lld CE=%s C=%s E=%lld len_I=%lld len_F=%lld", (long long int)S, CE, C, (long long int)E, (long long int)len_I, (long long int)len_F);
+        snprintf(buffer, 128, "S=%lld CE=%s C=%s E=%lld len_I=%lld len_F=%lld", (long long int)S, CE, C, (long long int)E, (long long int)len_I, (long long int)len_F);
         buffer[127] = '\0'; //STRING TERMINATOR CONSTRAINT
         return buffer;
     }
@@ -1569,7 +1569,7 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
     /// NUM IN-LINE /// CONVERT DOUBLE TO NUM OBJECT (MAY BE PRECISION LOSS IF NOT ROUNDED), CODE: double a(-2543.9935500001); NUM A; A = A.from_double(a).round(5); print(A, "\n"); //-2543.99355
     NUM& NUM::from_double(double d) {
         static char s[64];
-        sprintf(s, "%.15f", d);
+        snprintf(s, 64, "%.15f", d);
         return *this = s;
     }
 
@@ -1590,7 +1590,7 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
     int raise_exit(const char* msg, const char* value) {
         char b[128];
         printf("\n>>>>>>>>>>>>>>>>>>>>>>>> EXIT: num7.h >>>>>>>>>>>>>>>>>>>>>>>> ");
-        sprintf(b, "ERROR %s: [%s]\n", msg, (i64)strlen(value) ? value : "\"\" => VOID STRING\n");
+        snprintf(b, 128, "ERROR %s: [%s]\n", msg, (i64)strlen(value) ? value : "\"\" => VOID STRING\n");
         printf("%s", b);
         exit(1); //return 1 (EXIT_FAILURE)
     }
@@ -2299,14 +2299,14 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
     /// NUM OUT-LINE /// CONVERT I32 TYPE TO UNSIGNED INTEGER STRING, CODE: I32 n = 4294967295; const char *ns = I32str(n); print(ns, "\n"); //4294967295
     const char* I32str(I32 num, int base) { //DEFAULT ARGS: (int base = 10)
         static char buf[40];
-        sprintf(buf, "%u", num);
+        snprintf(buf, 40, "%u", num);
         return buf;
         //return _ultoa(num, buf, base); //RETURN ONLY POSITIVE WITHOUT SIGN (sizeof(long int) = 4)
     }
     /// NUM OUT-LINE /// CONVERT i32 TYPE TO SIGNED INTEGER STRING, CODE: i32 n = -20000; const char* ns = i32str(n); print(ns, "\n"); //-20000
     const char* i32str(i32 num, int base) {  //DEFAULT ARGS: (int base = 10)
         static char buf[40];
-        sprintf(buf, "%d", num);
+        snprintf(buf, 40, "%d", num);
         return buf;
         //return _itoa(num, buf, base);
     }
@@ -5086,7 +5086,7 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
     ///// NUM OUT-LINE /// (BUILT-IN) CONVERT i64 TYPE TO SIGNED LONG LONG INTEGER STRING, CODE: NUM b(-9294967296); print(b, "\n"); //-9294967296.0
     //const char* i64str(i64 num) { 
     //    static char s[32];
-    //    sprintf(s, "%lld", num);
+    //    snprintf(s, 32, "%lld", num);
     //    return s;
     //}
     /// NUM OUT-LINE /// CONVERT i64 TYPE TO SIGNED LONG LONG INTEGER STRING, CODE: i64 n = -9223372036854775807LL - 1; const char *s = i64str(n);print(s, "\n"); //-9223372036854775808
@@ -5416,7 +5416,7 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
     /// NUM OUT-LINE /// (DEBUG) RETURN NUM STRUCTURE ATTRIBUTES STRING, CODE: NUM a("-123.0e-3"); char* s = sprint_fields(a); print(s, "\n"); //S=1 CE=123.0e-3 C=123.0 E=-3 len_I=3 len_F=1
     char* sprint_fields(NUM& a) {
         static char buffer[128];
-        sprintf(buffer, "S=%lld CE=%s C=%s E=%lld len_I=%lld len_F=%lld", (long long int)a.S, a.CE, a.C, (long long int)a.E, (long long int)a.len_I, (long long int)a.len_F);
+        snprintf(buffer, 128, "S=%lld CE=%s C=%s E=%lld len_I=%lld len_F=%lld", (long long int)a.S, a.CE, a.C, (long long int)a.E, (long long int)a.len_I, (long long int)a.len_F);
         buffer[127] = '\0'; //STRING TERMINATOR CONSTRAINT
         return buffer;
     }
@@ -5628,7 +5628,7 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
     /// NUM OUT-LINE /// CONVERT double TO STRING, CODE: NUM a(from_double(3.141592654000001)); a.print("\n"); //3.141592654000001
     char* from_double(double d) {
         static char s[64];
-        sprintf(s, "%.16f", d);
+        snprintf(s, 64, "%.16f", d);
         return s;
     }
     /// NUM OUT-LINE /// GAUSS SUM, CODE: NUM a(3); sumG(a).print("\n"); //6.0 = 3 + 2 + 1 + 0
