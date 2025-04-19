@@ -26,7 +26,8 @@ and copy all 3 files in the dynamic library directory /usr/local/lib (or /usr/li
 
 To compile app: 
 
-	g++ -std=c++14 test_num7_eligibility.cpp /usr/local/lib/libnum7.a #STATIC LIBRARY a.out (executable file) 
+	g++ -std=c++14 test_num7_eligibility.cpp /usr/local/lib/libnum7.a #DEBIAN => STATIC LIBRARY a.out (executable file)
+ 	g++ -std=c++14 test_num7_eligibility.cpp /lib64/libnum7.a 	  #FEDORA => STATIC LIBRARY a.out (executable file)
 	g++ -std=c++14 test_num7_eligibility.cpp -lnum7 -o b.out          #DYNAMIC LIBRARY b.out (executable file) 
 
 To search library directories on System: 
