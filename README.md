@@ -342,8 +342,8 @@ ROUNDING TYPES:
 	print("\n---- NUM standard rounding ----\n"); 
 	print(temp2.round(2), " (2 decs)\n");          //25.52 (2 decs) 
 	print("\n---- NUM bank     rounding ----\n"); 
-	print(temp2.round_bank(-1), " (united )\n"); //30.0 (united) 
- 	temp2 = "25.0"; print(temp2, " => "); print(temp2.round_bank(-1), " (united )\n"); //20.0 (united)
+	print(temp2.round_bank(-1), " (united)\n"); //30.0 (united) 
+ 	temp2 = "25.0"; print(temp2, " => "); print(temp2.round_bank(-1), " (united)\n"); //20.0 (united)
 
 ARBITRARY PRECISION ARITHMETIC:
 
