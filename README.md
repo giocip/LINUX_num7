@@ -112,35 +112,35 @@ for educational school, web e-commerce developing, accounting apps and general m
 
 (/) dividing:  
 
-	a = "3.0"; b = "5.7"; 		        //INITIALIZATION
-	R = a / b; 			                 //INITIALIZATION
+	a = "3.0"; b = "5.7"; 		  //INITIALIZATION
+	R = a / b; 			 //INITIALIZATION
 	print("R = "); print(R, "\n");  //R = 0.52631578947368421052631578947368
 	print("R = "); print(div(a, b).round(), "\n"); //R = 0.53
 
 (% operator) integer division and floating-point remainder:  
 
-	a = 2564; b = 17; 		           //INITIALIZATION 
+	a = 2564; b = 17; 		 //INITIALIZATION 
 	NUM quotient((a / b).trunk(0)); //DECLARATION AND INITIALIZATION 
 	NUM remainder(a % b); 	       //DECLARATION AND INITIALIZATION 
 	print("quotient = ");  quotient.print("\n");  	       //quotient = 150.0 
 	print("INTEGER remainder = "); remainder.print("\n"); //INTEGER remainder = 14.0 
-	a = "3.141592654"; b = 2;  			                     //INITIALIZATION
+	a = "3.141592654"; b = 2;  			     //INITIALIZATION
 	quotient = (a / b).trunk(0); remainder = a % b; 
 	print("quotient = ");  quotient.print("\n");       //quotient = 1.0 
 	print("FLOATING-POINT Remainder = "); remainder.print("\n");//FLOATING-POINT Remainder = 1.141592654 
 
 (sqrt) square root function:  
 
-	NUM a("123_456_789.1234567891");   //DECLARATION AND INITIALIZATION 
+	NUM a("123_456_789.1234567891");     //DECLARATION AND INITIALIZATION 
 	NUM root = a.sqrt(); 	            //DECLARATION AND INITIALIZATION 
 	print("root = ", root, "\n");	   //root = 11111.111066
 
 (^) power operator and pow function:  
 
-	NUM a("3.14"), b(2);			               //DECLARATION AND INITIALIZATION 
-	NUM power = a.pow(9); 			            //DECLARATION AND INITIALIZATION 
+	NUM a("3.14"), b(2);			 //DECLARATION AND INITIALIZATION 
+	NUM power = a.pow(9); 			//DECLARATION AND INITIALIZATION 
 	print("power = ", power, "\n");        //power = 29673.367320587092457984 
-	power = (b ^ 32); 		                //INITIALIZATION (power needs priority)
+	power = (b ^ 32); 		      //INITIALIZATION (power needs priority)
 	print("power = ", power, "\n");      //power = 4294967296.0 
 	print("power = ", pow(a, b), "\n"); //power = 9.8596 
 
@@ -177,14 +177,14 @@ On a given NUM variable the following arithmetic methods are available.
 
 variable arithmetic:
 
-	NUM a("10.25"); 		            //DECLARATION AND INITIALIZATION
-	print(a, "\n"); 		           //10.25
+	NUM a("10.25"); 		      //DECLARATION AND INITIALIZATION
+	print(a, "\n"); 		     //10.25
 	print(a.inc(1), "\n"); 		    //11.25
 	print(a.dec(2), "\n");		   //9.25
-	print(a.dec("4.25"), "\n");	//5.0
+	print(a.dec("4.25"), "\n");	  //5.0
 	print(a, "\n");			 //5.0
 	print(a = a.mul("5.01"), "\n"); //25.05
-	print(a, "\n");		             //25.05
+	print(a, "\n");		       //25.05
 	print(a.clear(), "\n");	      //0.0
 	print("----------------------\n"); //----------------------
 	
@@ -201,8 +201,8 @@ EVEN ODD numbering methods:
 
 	NUM a(6), b(3), c("3.14"); //DECLARATION AND INITIALIZATION
 	print(a, " INTEGER => "); print(a.is_integer(), "  EVEN => "); print(a.is_even(), "\n"); //6.0 INTEGER => 1 (true)  EVEN => 1 (true)
-	print(b, " INTEGER => "); print(a.is_integer(), "  ODD => "); print(b.is_odd(), "\n"); //3.0 INTEGER => 1 (true)  ODD  => 1 (true)
-	print(c, " FLOAT => "); print(c.is_floating(), "\n");				                         //3.14 FLOAT  => 1 (true)
+	print(b, " INTEGER => "); print(a.is_integer(), "  ODD => "); print(b.is_odd(), "\n");  //3.0 INTEGER => 1 (true)  ODD  => 1 (true)
+	print(c, " FLOAT => "); print(c.is_floating(), "\n");				       //3.14 FLOAT  => 1 (true)
 
 # Advanced logic programming snippets:
 
@@ -394,13 +394,13 @@ double TO NUM CONVERSION ARRAY:
 
  EFFECTIVE EXPRESSIONS NEED OF TEMPORARY VARIABLES:
 
-	NUM base(3), h(4);				                            //RIGHT-ANGLE TRIANGLE BASE AND HEIGHT
-	NUM b2, h2;					                                 //TEMPORARY VARIABLES
+	NUM base(3), h(4);				      //RIGHT-ANGLE TRIANGLE BASE AND HEIGHT
+	NUM b2, h2;					     //TEMPORARY VARIABLES
 	print("base = ", base, "  h = "); print(h, "\n");   //base = 3.0  h = 4.0
 	NUM hyp = sqr((b2 = base.x2()) + (h2 = h.x2()));   //PYTHAGOREAN EXPRESSION NEEDS OF TEMPORARY VARs
-	print("HYPOTENUSE = "); hyp.print("\n");	        //HYPOTENUSE = 5.0
-	NUM AREA = base * h / 2;			                   //AREA EXPRESSION
-	print("AREA = "); AREA.print("\n");	            //AREA = 6
+	print("HYPOTENUSE = "); hyp.print("\n");	  //HYPOTENUSE = 5.0
+	NUM AREA = base * h / 2;			 //AREA EXPRESSION
+	print("AREA = "); AREA.print("\n");	        //AREA = 6
 
  ERROR HANDLING:
 
@@ -415,15 +415,15 @@ double TO NUM CONVERSION ARRAY:
 		NUM base = "3", h = "4";                           //SYNTAX ERROR, RIGHT-ANGLE TRIANGLE BASE AND HEIGHT (ERROR ARGUMENT VALUE => NUM CONSTRUCTOR: [3])
 		if (error()) {                                    //DETECT ERRORs (ERROR ARGUMENT VALUE => NUM CONSTRUCTOR: [4])
 			print("INITIALIZATION VARIABLEs ERROR\n");
-			base = "3.0"; h = "4.0";		                  //SYNTAX OK
-			error_clear();                               //CLEAR ERROR
+			base = "3.0"; h = "4.0";		//SYNTAX OK
+			error_clear();                         //CLEAR ERROR
 		}
-		NUM b2, h2;					                                //TEMPORARY VARIABLES
+		NUM b2, h2;				     //TEMPORARY VARIABLES
 		print("base = ", base, "  h = "); print(h, "\n");  //base = 3.0  h = 4.0
 		NUM hyp = sqr((b2 = base.x2()) + (h2 = h.x2()));  //PYTHAGOREAN EXPRESSION NEEDS OF TEMPORARY VARs
-		print("HYPOTENUSE = "); hyp.print("\n");	       //HYPOTENUSE = 5.0
-		NUM AREA = base * h / 2;			                  //AREA EXPRESSION
-		print("AREA = "); AREA.print("\n");	           //AREA = 6
+		print("HYPOTENUSE = "); hyp.print("\n");	 //HYPOTENUSE = 5.0
+		NUM AREA = base * h / 2;			//AREA EXPRESSION
+		print("AREA = "); AREA.print("\n");	       //AREA = 6
 		print("---------------------\n");
 
 		toc = clock();
