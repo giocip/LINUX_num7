@@ -46,7 +46,7 @@ for educational school, web e-commerce developing, accounting apps and general m
 		/* SQUARE ROOT        */ sqr("2.0").print(" (SQUARE ROOT OF 2)\n"); 	   		                 //1.414213562         
 		/* ROUND 2 DIGITS     */ round(sqr("2.0")).print(" = SQUARE ROOT OF 2 (ROUND 2 DIGITS)\n");             //1.41  
 		/* ROUND 4 DIGITS     */ round(pi(), 4).print(" =~ 3.141592654 (ROUND 4 DIGITS)\n"); 	               //3.1416
-		/* ROUND BANKING      */ round_bank(pi(), 7).print(" =~ 3.14159265 (ROUND BANKING 7 DIGITS)\n");      //3.1415926
+		/* ROUND BANKING      */ round_bank("3.14159265", 7).print(" =~ 3.14159265 (ROUND BANKING 7 DIGITS)\n"); //3.1415926
 		/* ABS                */ Abs("-5.25").print(" (ABSOLUTE VALUE OF -5.25)\n"); 		             //5.25 
 		/* EXP                */ NUM n3("314.0e-2"); n3.print(" = 314.0e-2 (EXP)\n");                       //3.14 = 314.0e-2 (EXP)
 		/* SCIENTIFIC         */ NUM n4("314.0e-2"); into_exp(n4).print(" = 3.14e0 (SCI)\n");              //3.14 = 3.14e0 (SCI)
