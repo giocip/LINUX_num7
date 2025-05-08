@@ -95,9 +95,17 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
         strcpy(str, s);
         strip(str, " \t\n");    //CLEAR TAB AND SPACE LEFT AND RIGHT
         rm_c(str, '_');        //REMOVE DIGIT SEPARATOR CHARACTER (_)
-        if (str[0] == '-') { strcpy(str, str + 1); this->S = 1; } //CHECKING SIGN ...
-        else if (str[0] == '+') { strcpy(str, str + 1); this->S = 0; }
+        //if (str[0] == '-') { strcpy(str, str + 1); this->S = 1; } //CHECKING SIGN ...
+	//else if (str[0] == '+') { strcpy(str, str + 1); this->S = 0; }
+	//else this->S = 0;
+        i64 str_len = strlen(str);
+	if (str[0] == '-')      { memmove(str, str+1, str_len); this->S = 1; } //CHECKING SIGN ...
+        else if (str[0] == '+') { memmove(str, str+1, str_len); this->S = 0; }
         else this->S = 0;
+	
+        //if (str[0] == '-')      { str = str+1; this->S = 1; } //CHECKING SIGN ...
+	//else if (str[0] == '+') { str = str+1; this->S = 0; }
+        //else this->S = 0;
         if (is_strfmt_float(str)) {
             stripf0(str);
             if (this->S && !strcmp(str, "0.0")) { free(str); raise("ARGUMENT VALUE, ZERO CAN NOT BE SIGNED => NUM CONSTRUCTOR", s); *this = 0; return; } //CHECK -0.0
@@ -2264,8 +2272,10 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
         else { strcpy(a, aI); strcat(a, aF); strcpy(b, bI); strcat(b, bF); } //33.1234-5.0321=28.0913
         RAM_X = subis(a, b, false);
         SIGN = 0; //DEFAULT SIGN INITIALIZATION
-        if (RAM_X[0] == '-') { SIGN = 1; strcpy(RAM_X, RAM_X + 1); } //CHECK DIFFERENCE SIGN
-        DOT = (i64)strlen(RAM_X) - (bF_len > aF_len ? bF_len : aF_len);
+        //if (RAM_X[0] == '-') { SIGN = 1; strcpy(RAM_X, RAM_X + 1); } //CHECK DIFFERENCE SIGN
+        if (RAM_X[0] == '-') { SIGN = 1; memmove(RAM_X, RAM_X+1, strlen(RAM_X)); } //CHECK DIFFERENCE SIGN
+
+	DOT = (i64)strlen(RAM_X) - (bF_len > aF_len ? bF_len : aF_len);
         if (DOT < 0) { //5.012-5.004=0.008
             strcpy(RE, "0."); pad = strpads0(-DOT);
             strcat(RE, pad); strcat(RE, RAM_X); free(RAM_X); free(pad);
@@ -2480,8 +2490,10 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
         i64 n_L = (i64)strlen(n);
         if (n_L > 11) return 1;    //NOT VALID ("-2147483648" => 11 CHARACTERS)
         strcpy(s, n);
-        if (s[0] == '-') { strcpy(s, s + 1); NEG = 1; }                  //SIGN
-        else if (s[0] == '+') { strcpy(s, s + 1); NEG = 0; }
+        //if (s[0] == '-') { strcpy(s, s + 1); NEG = 1; }                  //SIGN
+	if (s[0] == '-') { memmove(s, s + 1, strlen(s)); NEG = 1; }                  //SIGN        
+
+	else if (s[0] == '+') { strcpy(s, s + 1); NEG = 0; }
         else if (isdigit(s[0])) NEG = 0;
         else return 1;                                                //NOT VALID
         i64 s_L = (i64)strlen(s);
@@ -3176,8 +3188,10 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
         if (be0[0] == '-') { strcpy(be0, be0 + 1); NEG0 = 1; } //BASE SIGN
         else if (be0[0] == '+') { strcpy(be0, be0 + 1); NEG0 = 0; }
         else NEG0 = 0;
-        if (be1[0] == '-') { strcpy(be1, be1 + 1); NEG1 = 1; } //BASE SIGN
-        else if (be1[0] == '+') { strcpy(be1, be1 + 1); NEG1 = 0; }
+        //if (be1[0] == '-') { strcpy(be1, be1 + 1); NEG1 = 1; } //BASE SIGN
+        if (be1[0] == '-') { memmove(be1, be1 + 1, strlen(be1)); NEG1 = 1; } //BASE SIGN
+	
+	else if (be1[0] == '+') { strcpy(be1, be1 + 1); NEG1 = 0; }
         else NEG1 = 0;
         if ((!strcmp(be0, "0") || !strcmp(be0, "0.0")) && NEG0) {
             free(r1); free(be0); free(be1); free(bf0); free(bf1);
@@ -3698,8 +3712,10 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
         if (a->E != b->E) { p = expEQ(a->CE, b->CE); A = p; free(p); } //EXPONENT EQUALIZATION
         else A = *a;
         p = subfs(A.C, b->C);
-        if (p[0] == '-') { strcpy(p, p + 1); R.S = 1; }
-        free(R.C); R.C = p;
+        //if (p[0] == '-') { strcpy(p, p + 1); R.S = 1; }
+	if (p[0] == '-') { memmove(p, p + 1, strlen(p)); R.S = 1; }
+
+	free(R.C); R.C = p;
         R.E = strcmp(p, "0.0") ? b->E : 0; //RESULT EXPONENT 
         Es = i64str(R.E); q = split(p, ".");
         R.len_I = (i64)strlen(q[0]); R.len_F = (i64)strlen(q[1]); free(q[0]);
