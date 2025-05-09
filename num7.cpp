@@ -149,7 +149,10 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
                 }
                 this->E = 0; //ZERO EQUALIZATION => 0.0e0
             }
-            strcpy(this->CE, this->C); strcat(this->CE, "e"); strcat(this->CE, i64str(E));
+            //strcpy(this->CE, this->C); 
+	    memmove(this->CE, this->C, strlen(this->C)+1);
+	    strcat(this->CE, "e"); 
+	    strcat(this->CE, i64str(E));
             p = split(this->C, ".");
             this->len_I = (i64)strlen(p[0]);
             this->len_F = (i64)strlen(p[1]);
