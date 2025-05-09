@@ -2491,8 +2491,8 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
         strcpy(s, n);
         //if (s[0] == '-') { strcpy(s, s + 1); NEG = 1; }                  //SIGN
 	if (s[0] == '-') { memmove(s, s + 1, strlen(s)); NEG = 1; }                  //SIGN        
-
-	else if (s[0] == '+') { strcpy(s, s + 1); NEG = 0; }
+	//else if (s[0] == '+') { strcpy(s, s + 1); NEG = 0; }
+	else if (s[0] == '+') { memmove(s, s + 1, strlen(s)); NEG = 0; }
         else if (isdigit(s[0])) NEG = 0;
         else return 1;                                                //NOT VALID
         i64 s_L = (i64)strlen(s);
