@@ -95,7 +95,8 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
         if (!s) { raise("ARGUMENT VALUE, NULL => NUM CONSTRUCTOR", "(null)"); *this = 0; return; } //RESET TO ZERO
         char* str = (char*)malloc(((i64)strlen(s) + 32) * sizeof(char));   //NULL, SIGN, DOT, 'e', 'E', 20 DIGIT EXPONENT //RAM DYNAMIC ALLOCATION
         if (!str) raise_exit("OUT OF RAM MEMORY => NUM CONSTRUCTOR", s);
-        strcpy(str, s);
+        //strcpy(str, s);
+	memmove(str, s, strlen(s)+1);
         strip(str, " \t\n");    //CLEAR TAB AND SPACE LEFT AND RIGHT
         rm_c(str, '_');        //REMOVE DIGIT SEPARATOR CHARACTER (_)
         //if (str[0] == '-') { strcpy(str, str + 1); this->S = 1; } //CHECKING SIGN ...
