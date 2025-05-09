@@ -58,9 +58,12 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
         char** p;
         const char* N = i32str(n);
         char* str = num2exp(N);
-        if (n < 0) { strcpy(str, str + 1); this->CE = str; this->S = 1; }
+        //if (n < 0) { strcpy(str, str + 1); this->CE = str; this->S = 1; }
+        //else { this->CE = str; this->S = 0; }
+        if (n < 0) { memmove(str, str + 1, strlen(str)); this->CE = str; this->S = 1; }
         else { this->CE = str; this->S = 0; }
-        p = split(str, "e");
+
+		p = split(str, "e");
         if (!p) { raise("ARGUMENT VALUE, num2exp => NUM CONSTRUCTOR", str); *this = 0; return; }
         this->C = (char*)malloc(((i64)strlen(p[0]) + 32) * sizeof(char)); //RAM DYNAMIC ALLOCATION
         if (!(this->C)) raise_exit("OUT OF RAM MEMORY => NUM CONSTRUCTOR", N);
@@ -98,14 +101,10 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
         //if (str[0] == '-') { strcpy(str, str + 1); this->S = 1; } //CHECKING SIGN ...
 	//else if (str[0] == '+') { strcpy(str, str + 1); this->S = 0; }
 	//else this->S = 0;
-        i64 str_len = strlen(str);
-	if (str[0] == '-')      { memmove(str, str+1, str_len); this->S = 1; } //CHECKING SIGN ...
-        else if (str[0] == '+') { memmove(str, str+1, str_len); this->S = 0; }
+        if (str[0] == '-')      { memmove(str, str + 1, strlen(str)); this->S = 1; } //CHECKING SIGN ...
+        else if (str[0] == '+') { memmove(str, str + 1, strlen(str)); this->S = 0; }
         else this->S = 0;
-	
-        //if (str[0] == '-')      { str = str+1; this->S = 1; } //CHECKING SIGN ...
-	//else if (str[0] == '+') { str = str+1; this->S = 0; }
-        //else this->S = 0;
+
         if (is_strfmt_float(str)) {
             stripf0(str);
             if (this->S && !strcmp(str, "0.0")) { free(str); raise("ARGUMENT VALUE, ZERO CAN NOT BE SIGNED => NUM CONSTRUCTOR", s); *this = 0; return; } //CHECK -0.0
@@ -3185,14 +3184,20 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
         strcpy(be0, strtok(r1, "E")); //BASE
         p = strtok(0, "E"); if (!p) return NULL;
         strcpy(be1, p); //EXPONENT
-        if (be0[0] == '-') { strcpy(be0, be0 + 1); NEG0 = 1; } //BASE SIGN
-        else if (be0[0] == '+') { strcpy(be0, be0 + 1); NEG0 = 0; }
+
+        //if (be0[0] == '-') { strcpy(be0, be0 + 1); NEG0 = 1; } //BASE SIGN
+        //else if (be0[0] == '+') { strcpy(be0, be0 + 1); NEG0 = 0; }
+        //else NEG0 = 0;
+        if (be0[0] == '-')      { memmove(be0, be0 + 1, strlen(be0)); NEG0 = 1; } //BASE SIGN
+        else if (be0[0] == '+') { memmove(be0, be0 + 1, strlen(be0)); NEG0 = 0; }
         else NEG0 = 0;
         //if (be1[0] == '-') { strcpy(be1, be1 + 1); NEG1 = 1; } //BASE SIGN
-        if (be1[0] == '-') { memmove(be1, be1 + 1, strlen(be1)); NEG1 = 1; } //BASE SIGN
-	
-	else if (be1[0] == '+') { strcpy(be1, be1 + 1); NEG1 = 0; }
+        //else if (be1[0] == '+') { strcpy(be1, be1 + 1); NEG1 = 0; }
+        //else NEG1 = 0;
+        if (be1[0] == '-')      { memmove(be1, be1 + 1, strlen(be1)); NEG1 = 1; } //BASE SIGN
+        else if (be1[0] == '+') { memmove(be1, be1 + 1, strlen(be1)); NEG1 = 0; }
         else NEG1 = 0;
+
         if ((!strcmp(be0, "0") || !strcmp(be0, "0.0")) && NEG0) {
             free(r1); free(be0); free(be1); free(bf0); free(bf1);
             return NULL;
@@ -3289,9 +3294,14 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
         char* TM = (char*)malloc(DIM); if (!TM) raise_exit("OUT OF RAM MEMORY => num2exp", a);//RAM DYNAMIC ALLOCATION
         strcpy(A, a);
         rm_c(A, '_');                                    //REMOVE UNDERSCORE ('_')
-        if (A[0] == '-') { strcpy(A, A + 1); NEG = 1; } //SIGN
-        else if (A[0] == '+') { strcpy(A, A + 1); NEG = 0; }
+
+        //if (A[0] == '-') { strcpy(A, A + 1); NEG = 1; } //SIGN
+        //else if (A[0] == '+') { strcpy(A, A + 1); NEG = 0; }
+        //else NEG = 0;
+        if (A[0] == '-')      { memmove(A, A + 1, strlen(A)); NEG = 1; } //SIGN
+        else if (A[0] == '+') { memmove(A, A + 1, strlen(A)); NEG = 0; }
         else NEG = 0;
+
         if (is_strfmt_int(A)) { //INTEGER FORMAT: 34 => 3.4e1  -1000 => -1.0e3  112500 => 1.125e5
             stripi0(A);
             if (!strcmp(A, "0") && NEG) { raise("ARGUMENT VALUE, ZERO CAN NOT BE SIGNED => num2exp", a); return NULL; }
@@ -3802,10 +3812,15 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
         if (!OFFSET) { strcpy(A, a); free(B); return A; } //-0.0123e6 1.0e6 => -0.0123e6 (UNCHANGED) (20240422)
         char* R = (char*)malloc(((OFFSET < 0 ? -OFFSET : OFFSET) + DIM) * sizeof(char)); //RAM DYNAMIC ALLOCATION
         if (!R) raise_exit("OUT OF RAM MEMORY => expEQ", "RAM REALLOCATION");
-        if (A[0] == '-') { strcpy(A, A + 1); NEG = 1; } //SIGN
-        else if (A[0] == '+') { strcpy(A, A + 1); NEG = 0; }
+        
+		//if (A[0] == '-') { strcpy(A, A + 1); NEG = 1; } //SIGN
+        //else if (A[0] == '+') { strcpy(A, A + 1); NEG = 0; }
+        //else NEG = 0;
+        if (A[0] == '-')      { memmove(A, A + 1, strlen(A)); NEG = 1; } //SIGN
+        else if (A[0] == '+') { memmove(A, A + 1, strlen(A)); NEG = 0; }
         else NEG = 0;
-        char* AI, * AF;
+        
+		char* AI, * AF;
         //i64 len_A = (i64)strlen(A);
         stripf0(A);                 //CLEAR ZEROS
         char** AA = split(A, "."); //BASE A INTEGER.FRACTIONAL
