@@ -127,7 +127,10 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
         }
         else if (is_strfmt_exp(str)) {
             this->CE = str;
-            p2 = lower(str); strcpy(str, p2); free(p2); //'e' or 'E' ALLOWED ("-1e-6" OR "-1E-6")
+            p2 = lower(str); 
+	    //strcpy(str, p2);
+	    memmove(str, p2, strlen(p2)+1);
+	    free(p2); //'e' or 'E' ALLOWED ("-1e-6" OR "-1E-6")
             p = split(str, "e");
             if (!p) { raise("ARGUMENT VALUE, is_strfmt_exp => NUM CONSTRUCTOR", str); *this = 0; return; }
             this->C = (char*)malloc(((i64)strlen(p[0]) + 32) * sizeof(char)); //RAM DYNAMIC ALLOCATION
