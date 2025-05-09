@@ -111,7 +111,9 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
             if (this->S && !strcmp(str, "0.0")) { free(str); raise("ARGUMENT VALUE, ZERO CAN NOT BE SIGNED => NUM CONSTRUCTOR", s); *this = 0; return; } //CHECK -0.0
             this->CE = str;
             char* t = num2exp(str);
-            strcpy(str, t); free(t);
+            //strcpy(str, t); 
+	    memmove(str, t, strlen(t)+1);
+	    free(t);
             p = split(str, "e");
             if (!p) { raise("ARGUMENT VALUE, num2exp => NUM CONSTRUCTOR", str); *this = 0; return; }
             this->C = (char*)malloc(((i64)strlen(p[0]) + 32) * sizeof(char)); //RAM DYNAMIC ALLOCATION
