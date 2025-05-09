@@ -63,7 +63,7 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
         if (n < 0) { memmove(str, str + 1, strlen(str)); this->CE = str; this->S = 1; }
         else { this->CE = str; this->S = 0; }
 
-		p = split(str, "e");
+	p = split(str, "e");
         if (!p) { raise("ARGUMENT VALUE, num2exp => NUM CONSTRUCTOR", str); *this = 0; return; }
         this->C = (char*)malloc(((i64)strlen(p[0]) + 32) * sizeof(char)); //RAM DYNAMIC ALLOCATION
         if (!(this->C)) raise_exit("OUT OF RAM MEMORY => NUM CONSTRUCTOR", N);
@@ -115,7 +115,8 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
             if (!p) { raise("ARGUMENT VALUE, num2exp => NUM CONSTRUCTOR", str); *this = 0; return; }
             this->C = (char*)malloc(((i64)strlen(p[0]) + 32) * sizeof(char)); //RAM DYNAMIC ALLOCATION
             if (!(this->C)) raise_exit("OUT OF RAM MEMORY => NUM CONSTRUCTOR", s);
-            strcpy(C, p[0]);
+            //strcpy(C, p[0]);
+	    memmove(this->C, p[0], strlen(p[0])+1);
             if (OFI31(p[1])) { raise("EXPONENT OVERFLOW => NUM CONSTRUCTOR", p[1]); *this = 0; return; }
             this->E = (i64)atoll(p[1]); free(p[0]);
             p = split(this->C, "."); this->len_I = (i64)strlen(p[0]); this->len_F = (i64)strlen(p[1]); free(p[0]);
@@ -128,8 +129,9 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
             if (!p) { raise("ARGUMENT VALUE, is_strfmt_exp => NUM CONSTRUCTOR", str); *this = 0; return; }
             this->C = (char*)malloc(((i64)strlen(p[0]) + 32) * sizeof(char)); //RAM DYNAMIC ALLOCATION
             if (!(this->C)) raise_exit("OUT OF RAM MEMORY => NUM CONSTRUCTOR", s);
-            strcpy(this->C, p[0]);
-            if (OFI31(p[1])) { raise("EXPONENT OVERFLOW => NUM CONSTRUCTOR", p[1]); *this = 0; return; }
+            //strcpy(this->C, p[0]);
+            memmove(this->C, p[0], strlen(p[0]) + 1);
+	    if (OFI31(p[1])) { raise("EXPONENT OVERFLOW => NUM CONSTRUCTOR", p[1]); *this = 0; return; }
             this->E = (i64)atoll(p[1]); free(p[0]);
             stripf0(this->C); //000100.00e-00300 => 100.0e-300
             if (!strcmp(this->C, "0.0")) {
