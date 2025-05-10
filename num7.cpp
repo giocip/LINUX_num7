@@ -719,7 +719,7 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
     char* NUM::get_NUM() {
 	char* s = NULL;
         s = (char*)malloc(((i64)strlen(CE) + 2) * sizeof(char)); //SIGN + NULL //RAM DYNAMIC ALLOCATION
-        if (!s) raise_exit("OUT OF RAM MEMORY => get_NUM", s);
+        if (!s) raise_exit("OUT OF RAM MEMORY => get_NUM", "malloc => s = NULL");
         strcpy(s, S ? "-" : ""); strcat(s, CE);
         return s;
     }
