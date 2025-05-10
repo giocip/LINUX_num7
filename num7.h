@@ -110,7 +110,8 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
     I32 I32int(const char*, int base = 10, int check = 1);
     i32 i32int(const char*, int base = 10, int check = 1);
     const char* i32str(i32, int base = 10);
-    const char* I32str(I32, int base = 10);
+    //const char* I32str(I32, int base = 10);
+    const char* I32str(I32);
     const char* i64str(i64);
     const char* I64str(I64, int base = 10);
     I64 I64int(const char*, int base = 10);
