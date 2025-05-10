@@ -717,7 +717,8 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
     }
     /// NUM IN-LINE /// NEED: free() RETURN NUM AS STORED EXPONENTIAL NUMBER STRING (SIGNED), CODE: NUM a("-5.123"); a.print_fields(); char* p = a.get_NUM(); print(p, "\n"); free(p); //-5.123e0
     char* NUM::get_NUM() {
-        char* s = (char*)malloc(((i64)strlen(CE) + 2) * sizeof(char)); //SIGN + NULL //RAM DYNAMIC ALLOCATION
+	char* s = NULL;
+        s = (char*)malloc(((i64)strlen(CE) + 2) * sizeof(char)); //SIGN + NULL //RAM DYNAMIC ALLOCATION
         if (!s) raise_exit("OUT OF RAM MEMORY => get_NUM", s);
         strcpy(s, S ? "-" : ""); strcat(s, CE);
         return s;
