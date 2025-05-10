@@ -67,8 +67,8 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
         if (!p) { raise("ARGUMENT VALUE, num2exp => NUM CONSTRUCTOR", str); *this = 0; return; }
         this->C = (char*)malloc(((i64)strlen(p[0]) + 32) * sizeof(char)); //RAM DYNAMIC ALLOCATION
         if (!(this->C)) raise_exit("OUT OF RAM MEMORY => NUM CONSTRUCTOR", N);
-        //strcpy(this->C, p[0]);
-        memmove(this->C, p[0], strlen(p[0])+1);
+        strcpy(this->C, p[0]);
+        //memmove(this->C, p[0], strlen(p[0])+1);
 	this->E = (i64)atoll(p[1]); free(p[0]);
         p = split(this->C, "."); this->len_I = (i64)strlen(p[0]); this->len_F = (i64)strlen(p[1]);
         free(p[0]);
@@ -96,8 +96,8 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
         if (!s) { raise("ARGUMENT VALUE, NULL => NUM CONSTRUCTOR", "(null)"); *this = 0; return; } //RESET TO ZERO
         char* str = (char*)malloc(((i64)strlen(s) + 32) * sizeof(char));   //NULL, SIGN, DOT, 'e', 'E', 20 DIGIT EXPONENT //RAM DYNAMIC ALLOCATION
         if (!str) raise_exit("OUT OF RAM MEMORY => NUM CONSTRUCTOR", s);
-        //strcpy(str, s);
-	memmove(str, s, strlen(s)+1);
+        strcpy(str, s);
+	//memmove(str, s, strlen(s)+1);
         strip(str, " \t\n");    //CLEAR TAB AND SPACE LEFT AND RIGHT
         rm_c(str, '_');        //REMOVE DIGIT SEPARATOR CHARACTER (_)
         //if (str[0] == '-') { strcpy(str, str + 1); this->S = 1; } //CHECKING SIGN ...
@@ -106,21 +106,20 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
         if (str[0] == '-')      { memmove(str, str + 1, strlen(str)); this->S = 1; } //CHECKING SIGN ...
         else if (str[0] == '+') { memmove(str, str + 1, strlen(str)); this->S = 0; }
         else this->S = 0;
-
         if (is_strfmt_float(str)) {
             stripf0(str);
             if (this->S && !strcmp(str, "0.0")) { free(str); raise("ARGUMENT VALUE, ZERO CAN NOT BE SIGNED => NUM CONSTRUCTOR", s); *this = 0; return; } //CHECK -0.0
             this->CE = str;
             char* t = num2exp(str);
-            //strcpy(str, t); 
-	    memmove(str, t, strlen(t)+1);
+            strcpy(str, t); 
+	    //memmove(str, t, strlen(t)+1);
 	    free(t);
             p = split(str, "e");
             if (!p) { raise("ARGUMENT VALUE, num2exp => NUM CONSTRUCTOR", str); *this = 0; return; }
             this->C = (char*)malloc(((i64)strlen(p[0]) + 32) * sizeof(char)); //RAM DYNAMIC ALLOCATION
             if (!(this->C)) raise_exit("OUT OF RAM MEMORY => NUM CONSTRUCTOR", s);
-            //strcpy(C, p[0]);
-	    memmove(this->C, p[0], strlen(p[0])+1);
+            strcpy(C, p[0]);
+	    //memmove(this->C, p[0], strlen(p[0])+1);
             if (OFI31(p[1])) { raise("EXPONENT OVERFLOW => NUM CONSTRUCTOR", p[1]); *this = 0; return; }
             this->E = (i64)atoll(p[1]); free(p[0]);
             p = split(this->C, "."); this->len_I = (i64)strlen(p[0]); this->len_F = (i64)strlen(p[1]); free(p[0]);
@@ -129,15 +128,15 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
         else if (is_strfmt_exp(str)) {
             this->CE = str;
             p2 = lower(str); 
-	    //strcpy(str, p2);
-	    memmove(str, p2, strlen(p2)+1);
+	    strcpy(str, p2);
+	    //memmove(str, p2, strlen(p2)+1);
 	    free(p2); //'e' or 'E' ALLOWED ("-1e-6" OR "-1E-6")
             p = split(str, "e");
             if (!p) { raise("ARGUMENT VALUE, is_strfmt_exp => NUM CONSTRUCTOR", str); *this = 0; return; }
             this->C = (char*)malloc(((i64)strlen(p[0]) + 32) * sizeof(char)); //RAM DYNAMIC ALLOCATION
             if (!(this->C)) raise_exit("OUT OF RAM MEMORY => NUM CONSTRUCTOR", s);
-            //strcpy(this->C, p[0]);
-            memmove(this->C, p[0], strlen(p[0]) + 1);
+            strcpy(this->C, p[0]);
+            //memmove(this->C, p[0], strlen(p[0]) + 1);
 	    if (OFI31(p[1])) { raise("EXPONENT OVERFLOW => NUM CONSTRUCTOR", p[1]); *this = 0; return; }
             this->E = (i64)atoll(p[1]); free(p[0]);
             stripf0(this->C); //000100.00e-00300 => 100.0e-300
@@ -150,8 +149,8 @@ namespace num7 {          // STARTING CURLY BRACKET num7 namespace
                 }
                 this->E = 0; //ZERO EQUALIZATION => 0.0e0
             }
-            //strcpy(this->CE, this->C); 
-	    memmove(this->CE, this->C, strlen(this->C)+1);
+            strcpy(this->CE, this->C); 
+	    //memmove(this->CE, this->C, strlen(this->C)+1);
 	    strcat(this->CE, "e"); 
 	    strcat(this->CE, i64str(E));
             p = split(this->C, ".");
