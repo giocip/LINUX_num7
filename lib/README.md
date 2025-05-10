@@ -9,7 +9,7 @@ It may need:
 
 To get STATIC LIBRARY libnum7.a: 
   
-	g++ -std=c++14 -c num7.cpp #num.o STATIC LIBRARY (num7.h in the same compiling folder)  
+	g++ -std=c++14 -fpic -c num7.cpp #num.o STATIC LIBRARY (num7.h in the same compiling folder)  
 	ar cr libnum7.a num7.o     #create archive static library libnum7.a  
 
 To get DYNAMIC LIBRARY libnum7.so.1.0.0: 
