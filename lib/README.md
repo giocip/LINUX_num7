@@ -105,3 +105,17 @@ To BUILD_num7_dyn_library_and_DEBIAN_PACKAGE (production):
 	  exit 1
 	fi
 
+To control file:
+	
+	Package: num7
+	Version: 1.0.0
+	Maintainer: https://github.com/giocip/LINUX_num7
+	Architecture: amd64
+	Description: C++ ARBITRARY PRECISION ARITHMETIC-LOGIC DECIMAL LIBRARY FOR LINUX KERNEL 6: ls -l /lib/x86_64-linux-gnu/libnum7* /usr/include/num7.h => 5 files
+
+To clean.sh file:
+
+ 	#!/bin/bash
+	rm -Rf LINUX_num7
+	rm -Rf libnum7*
+	rm -Rf num7.deb
