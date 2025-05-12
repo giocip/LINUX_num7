@@ -119,3 +119,47 @@ To clean.sh file:
 	rm -Rf LINUX_num7
 	rm -Rf libnum7*
 	rm -Rf num7.deb
+
+To RED-FAT/FEDORA /root/rpmbuild/SPECS/num7.spec file:
+	
+	Name:           num7
+	Version:        1.0.0
+	Release:        8
+	Summary:        C++ ARBITRARY PRECISION ARITHMETIC-LOGIC DECIMAL LIBRARY FOR LINUX KERNEL 6 BY AMD64 SYSTEMS
+	
+	License:        MIT
+	URL:            https://github.com/giocip/LINUX_num7
+	Source0:        https://github.com/giocip/LINUX_num7/lib
+	Vendor:         giocip
+	
+	%description
+	num7 library dir: ls -l /lib64/libnum7* /usr/include/num7.h => 5 files
+	
+	%prep
+	
+	%build
+	
+	%install
+	mkdir -p %{buildroot}/usr/lib64
+	mkdir -p %{buildroot}/usr/include
+	cp /root/rpmbuild/SOURCES/libnum7.so.1.0.0 %{buildroot}/usr/lib64/
+	cp /root/rpmbuild/SOURCES/libnum7.a        %{buildroot}/usr/lib64/
+	cp /root/rpmbuild/SOURCES/num7.h           %{buildroot}/usr/include/
+	ln -sf libnum7.so.1.0.0 %{buildroot}/usr/lib64/libnum7.so.1 #create a soname symbolic link
+	ln -sf libnum7.so.1.0.0 %{buildroot}/usr/lib64/libnum7.so   #create a soname symbolic link
+	
+	%files
+	/usr/lib64/libnum7.a
+	/usr/lib64/libnum7.so.1.0.0
+	/usr/lib64/libnum7.so.1
+	/usr/lib64/libnum7.so
+	/usr/include/num7.h
+	
+	%changelog
+	* Sun May 11 2025 Giovanni Cipriani <giocip7@gmail.com> - 1.0.0-8
+	- C++ ARBITRARY PRECISION ARITHMETIC-LOGIC DECIMAL LIBRARY FOR LINUX KERNEL 6 BY AMD64 SYSTEMS
+
+To build_rpm_num7_package.sh:
+
+	#!/bin/bash
+	rpmbuild -ba n7.spec
