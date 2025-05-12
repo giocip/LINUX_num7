@@ -162,4 +162,4 @@ To RED-FAT/FEDORA /root/rpmbuild/SPECS/num7.spec file:
 To build_rpm_num7_package.sh:
 
 	#!/bin/bash
-	rpmbuild -ba n7.spec
+	rpmbuild -ba num7.spec
