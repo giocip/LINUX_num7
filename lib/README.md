@@ -35,6 +35,73 @@ To search library directories on System:
 	ld --verbose | grep SEARCH_DIR 
 	g++ -print-search-dirs 
 
-  To check app/executable file: 
+To check app/executable file: 
 
 	readelf -h /path/to/executable       
+
+To BUILD-debug_num7_library_and_DEBIAN_PACKAGE file (debug):
+	
+	echo 'BULDING num7 library and debian package, PLEASE BE PATIENT...'
+	cd LINUX_num7
+	g++ -O0 -g -Wall -Wextra -fsanitize=address,undefined -fpic -c num7.cpp
+	g++ -O0 -g -Wall -Wextra -fsanitize=address,undefined -fpic -o libnum7.so.1.0.0 num7.o -shared -Wl,-soname,libnum7.so.1
+	ln -s libnum7.so.1.0.0 libnum7.so.1 #create a soname symbolic link
+	ln -s libnum7.so.1.0.0 libnum7.so #create a symbolic link for the library name linker
+	g++ -O0 -g -Wall -Wextra -fsanitize=address,undefined -fpic -c num7.cpp # => num.o STATIC LIBRARY
+	ar cr libnum7.a num7.o #create archive static library libnum7.a
+	mkdir num7 && mkdir num7/DEBIAN
+	chmod 755 num7
+	chmod 755 num7/DEBIAN
+	mkdir -p num7/lib/x86_64-linux-gnu #GENERAL LINUX SYSTEM-LIBRARY DIRECTORY
+	mkdir -p num7/usr/include
+	chmod 755 num7/usr && chmod 755 num7/usr/include
+	cp -P libnum7* num7/lib/x86_64-linux-gnu
+	#cp -P libnum7.a num7/lib/x86_64-linux-gnu
+	cp -P num7.h num7/usr/include
+	cp ../control ./num7/DEBIAN #copy control file with metadata library in current directory
+	dpkg-deb --build num7
+	cp num7.deb .. #previous directory
+	cp -P libnum7* ..
+	if [ $? -eq 0 ]
+	then
+	  echo -e "\n*** SUCCESS ***"
+	  exit 0
+	else
+	  echo -e "\n### FAILURE ###" >&2
+	  exit 1
+	fi
+
+To BUILD_num7_dyn_library_and_DEBIAN_PACKAGE (production):
+
+	rm -Rf LINUX_num7
+	git clone https://github.com/giocip/LINUX_num7
+	echo 'BULDING num7 library and debian package, PLEASE BE PATIENT...'
+	cd LINUX_num7
+	g++ -fpic -c num7.cpp
+	g++ -fpic -o libnum7.so.1.0.0 num7.o -shared -Wl,-soname,libnum7.so.1
+	ln -s libnum7.so.1.0.0 libnum7.so.1 #create a soname symbolic link
+	ln -s libnum7.so.1.0.0 libnum7.so #create a symbolic link for the library name linker
+	g++ -fpic -c num7.cpp # => num.o STATIC LIBRARY
+	ar cr libnum7.a num7.o #create archive static library libnum7.a
+	mkdir num7 && mkdir num7/DEBIAN
+	chmod 755 num7
+	chmod 755 num7/DEBIAN
+	mkdir -p num7/lib/x86_64-linux-gnu #GENERAL LINUX SYSTEM-LIBRARY DIRECTORY
+	mkdir -p num7/usr/include
+	chmod 755 num7/usr && chmod 755 num7/usr/include
+	cp -P libnum7* num7/lib/x86_64-linux-gnu
+	#cp -P libnum7.a num7/lib/x86_64-linux-gnu
+	cp -P num7.h num7/usr/include
+	cp ../control ./num7/DEBIAN #copy control file with metadata library in current directory
+	dpkg-deb --build num7
+	cp num7.deb .. #previous directory
+	cp -P libnum7* ..
+	if [ $? -eq 0 ]
+	then
+	  echo -e "\n*** SUCCESS ***"
+	  exit 0
+	else
+	  echo -e "\n### FAILURE ###" >&2
+	  exit 1
+	fi
+
